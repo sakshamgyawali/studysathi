@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySathi - Your Study Companion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="alertContainer" class="alert-container"></div>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="12" fill="url(#gradient)"/>
+                    <path d="M20 10L12 15V25L20 30L28 25V15L20 10Z" stroke="white" stroke-width="2" fill="none"/>
+                    <circle cx="20" cy="20" r="3" fill="white"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" stop-color="#667eea"/>
+                            <stop offset="100%" stop-color="#764ba2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>StudySathi</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active" data-page="dashboard">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                </svg>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="tasks">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h6a1 1 0 100-2H7zm0 4a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
+                </svg>
+                <span>Tasks</span>
+            </li>
+            <li class="nav-item" data-page="pomodoro">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                <span>Pomodoro</span>
+            </li>
+            <li class="nav-item" data-page="stats">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                </svg>
+                <span>Stats</span>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="main-content">        <section id="dashboard" class="page active">
+            <header class="page-header">
+                <h1>Welcome Back, Student! 👋</h1>
+                <p class="subtitle">Here's your study overview for today</p>
+            </header>
+
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon urgent">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="urgentCount">0</h3>
+                        <p>Urgent Tasks</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon study">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="todayStudyTime">0h 0m</h3>
+                        <p>Today's Study Time</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon focus">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="pomodoroCount">0</h3>
+                        <p>Pomodoro Sessions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="study-suggestion">
+                <button id="suggestStudyBtn" class="suggest-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                    </svg>
+                    What Should I Study Today?
+                </button>
+                <div id="studySuggestion" class="suggestion-result"></div>
+            </div>
+
+   
+            <div class="dashboard-section">
+                <h2>Upcoming Tasks</h2>
+                <div id="upcomingTasks" class="task-list-preview"></div>
+            </div>
+        </section>
+
+        <section id="tasks" class="page">
+            <header class="page-header">
+                <h1>Homework & Tasks</h1>
+                <p class="subtitle">Manage your assignments and deadlines</p>
+            </header>
+
+            <div class="add-task-card">
+                <h3>Add New Task</h3>
+                <form id="addTaskForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="taskSubject">Subject</label>
+                            <input type="text" id="taskSubject" required placeholder="e.g., Mathematics">
+                        </div>
+                        <div class="form-group">
+                            <label for="taskTitle">Task Title</label>
+                            <input type="text" id="taskTitle" required placeholder="e.g., Chapter 5 Assignment">
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDueDate">Due Date</label>
+                            <input type="date" id="taskDueDate" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-primary">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 2a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5A.5.5 0 018 2z"/>
+                                </svg>
+                                Add Task
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="task-filter">
+                <button class="filter-btn active" data-filter="all">All Tasks</button>
+                <button class="filter-btn" data-filter="urgent">🔴 Urgent</button>
+                <button class="filter-btn" data-filter="soon">🟡 Soon</button>
+                <button class="filter-btn" data-filter="later">🟢 Later</button>
+                <button class="filter-btn" data-filter="completed">✓ Completed</button>
+            </div>
+
+            <div id="taskList" class="task-list"></div>
+        </section>
+
+        <section id="pomodoro" class="page">
+            <header class="page-header">
+                <h1>Pomodoro Timer</h1>
+                <p class="subtitle">Stay focused with 25-minute study sessions</p>
+            </header>
+
+            <div class="pomodoro-container">
+                <div class="pomodoro-card">
+                    <div class="timer-display">
+                        <svg class="timer-circle" width="300" height="300">
+                            <circle cx="150" cy="150" r="140" class="timer-bg"/>
+                            <circle cx="150" cy="150" r="140" class="timer-progress" id="timerProgress"/>
+                        </svg>
+                        <div class="timer-text">
+                            <div id="timerDisplay" class="time">25:00</div>
+                            <div id="timerLabel" class="label">Focus Time</div>
+                        </div>
+                    </div>
+                    <div class="timer-controls">
+                        <button id="startBtn" class="timer-btn start">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Start
+                        </button>
+                        <button id="pauseBtn" class="timer-btn pause" disabled>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                            </svg>
+                            Pause
+                        </button>
+                        <button id="resetBtn" class="timer-btn reset">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                            </svg>
+                            Reset
+                        </button>
+                    </div>
+                    <div class="timer-info">
+                        <div class="info-item">
+                            <span>Sessions Today:</span>
+                            <strong id="sessionsToday">0</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="stats" class="page">
+            <header class="page-header">
+                <h1>Study Statistics</h1>
+                <p class="subtitle">Track your study progress over time</p>
+            </header>
+
+            <div class="stats-container">
+                <div class="stats-row">
+                    <div class="stats-card large">
+                        <h3>Today's Study Time</h3>
+                        <div class="stats-number" id="statsTodayTime">0h 0m</div>
+                        <div class="stats-meta">Keep it up! 🔥</div>
+                    </div>
+                    <div class="stats-card large">
+                        <h3>This Week's Study Time</h3>
+                        <div class="stats-number" id="statsWeekTime">0h 0m</div>
+                        <div class="stats-meta">Total study hours</div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3>Weekly Study Breakdown</h3>
+                    <div class="chart-container">
+                        <div class="bar-chart" id="weeklyChart"></div>
+                    </div>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stats-card">
+                        <h3>Total Tasks</h3>
+                        <div class="stats-number" id="totalTasks">0</div>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Completed Tasks</h3>
+                        <div class="stats-number" id="completedTasks">0</div>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Pomodoro Sessions</h3>
+                        <div class="stats-number" id="totalPomodoros">0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
